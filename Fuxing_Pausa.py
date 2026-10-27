@@ -217,7 +217,12 @@ def _resolve_desktop_directory():
 # Cada PC tendrá su propia base en Escritorio\FuxingV1. El histórico de sorteos
 # se descarga/valida allí; el registro de predicciones empieza vacío en esa PC.
 DESKTOP_DIR = _resolve_desktop_directory()
-BASE_DIR = DESKTOP_DIR / "FuxingV1"
+# En GitHub Actions (o cualquier entorno sin escritorio persistente), usar
+# una carpeta dentro del propio repositorio para que los datos persistan.
+if os.environ.get("GITHUB_ACTIONS") == "true":
+    BASE_DIR = Path(__file__).resolve().parent / "datos_fuxing"
+else:
+    BASE_DIR = DESKTOP_DIR / "FuxingV1"
 BASE_DIR.mkdir(parents=True, exist_ok=True)
 
 DATA_DIR = BASE_DIR / "bonoloto_data"
