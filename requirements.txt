@@ -1,0 +1,10 @@
+numpy
+pandas
+requests
+beautifulsoup4
+scikit-learn
+xgboost
+lightgbm
+torch
+tzdata
+openpyxl
